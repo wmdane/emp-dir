@@ -1,10 +1,12 @@
 import React from "react";
 import API from "../utils/API";
 import EmployeeTable from "./EmployeeTable";
+import SearchForm from "./SearchForm";
 
 class Search extends React.Component {
   state = {
-    employees: []
+    employees: [],
+    search: ""
   };
 
   componentDidMount() {
@@ -13,23 +15,15 @@ class Search extends React.Component {
 
   printEmployees = () => {
     API()
-    .then(res => this.setState({ employees: res.data.results }))
-    .catch(err => console.log(err));
+      .then(res => this.setState({ employees: res.data.results }))
+      .catch(err => console.log(err));
   };
 
-  filterEmployees = (event) => {
-    const searchTerm = event.target.value;
-    const filteredList = this.state.employees.filter((employee) => {
-      return employee.name.first.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1;
-    });
-    this.setState({ employees: filteredList});
-  }
 
   handleInputChange = event => {
-    const name = event.target.name;
     const value = event.target.value;
     this.setState({
-      [name]: value
+      search: value
     });
   };
 
@@ -39,11 +33,17 @@ class Search extends React.Component {
   // }
 
   render() {
+    const filteredList = this.state.employees.filter(employee => 
+      employee.name.first.toLowerCase().includes(this.state.search.toLowerCase()));
+
     return (
       <div>
-        {console.log(this.state.employees)}
+        <SearchForm
+          search={this.state.search}
+          handleInputChange={this.handleInputChange}
+        />
         <EmployeeTable
-        results = {this.state.employees}
+          results={filteredList}
         />
       </div>
     )
