@@ -19,9 +19,10 @@ class Search extends React.Component {
 
   filterEmployees = (event) => {
     const searchTerm = event.target.value;
-    const filteredList = this.state.employees.input((employee) => {
-      return 
-    })
+    const filteredList = this.state.employees.filter((employee) => {
+      return employee.name.first.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1;
+    });
+    this.setState({ employees: filteredList});
   }
 
   handleInputChange = event => {

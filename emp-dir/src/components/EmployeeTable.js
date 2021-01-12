@@ -1,5 +1,4 @@
 import React from "react";
-import Search from "./Search";
 
 function EmployeeTable(props) {
   const renderT = (props) => {
@@ -34,6 +33,7 @@ function EmployeeTable(props) {
 
 export default EmployeeTable;
 
+// tried to map the results as they came out of the api get but i couldn't figure out how to then set those to map into their spots on the table
 // printEmployees = () => {
 //   API().then(res => this.setState({ employees: res.data.results}))
 //     // picture: req.picture.large,
