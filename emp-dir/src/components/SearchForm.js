@@ -2,7 +2,6 @@ import React from "react";
 
 function SearchForm(props) {
   return (
-    <form>
       <div>
         <form className="form">
           <input
@@ -15,7 +14,6 @@ function SearchForm(props) {
           />
         </form>
       </div>
-    </form>
   )
 }
 
